@@ -1,0 +1,22 @@
+.nav-container {
+  padding: 10px 0 0 0;
+
+  .nav-content {
+    padding: 10px
+  }
+
+  .app-title {
+    letter-spacing: 2px;
+    font-weight: bolder;
+    width: 80%
+  }
+
+  .nav-items {
+    list-style: none;
+
+    .nav-item {
+      letter-spacing: 1px;
+      margin-right: 20px
+    }
+  }
+}

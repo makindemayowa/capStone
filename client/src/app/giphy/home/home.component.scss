@@ -1,0 +1,43 @@
+@mixin gradient-background(){
+	background: #f5f5f5;
+	background: linear-gradient(135deg, #d3c9c9 0%, #798eea 90%);
+}
+
+.landing-container {
+	height: 500px;
+	background-image: url(../../../assets/images/giphy.jpg); 
+	background-size:cover;
+	background-position:center;
+	background-attachment:fixed;
+	position: relative;
+	background-repeat: no-repeat;
+	z-index: 0;
+
+	.overlay {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		opacity: 0.8;
+		@include gradient-background;
+		z-index: 1;
+	}
+
+	.signup-btn-container {
+		position: absolute;
+		z-index: 2;
+		top: 40%;
+		width: 100%;
+	}
+	
+	.signup-btn {
+		padding: 20px 100px;
+		color: #fff;
+		letter-spacing: 2px;
+		text-decoration: none;
+		background: #4aca85;
+		border-radius: 30px;
+		border: 1px solid #4aca85;
+	}
+}

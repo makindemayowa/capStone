@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { HomeComponent, NavComponent, CardComponent, GiphyService  } from './giphy';
 
 const appRoutes: Routes = [
   { path: 'trial', component: AppComponent },
@@ -19,16 +20,21 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    CardComponent,
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      // { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    GiphyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
