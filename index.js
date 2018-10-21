@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const routes = require('./server/routes/index');
+const cors = require('cors')
+
+const routes = require('./server/routes/index');
 
 const app = express();
 const port = process.env.PORT;
@@ -9,6 +11,8 @@ const port = process.env.PORT;
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+app.use(cors());
 app.use(bodyParser.json());
 
 app.listen(port, () => {
@@ -23,7 +27,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 
-// routes(app);
+routes(app);
 
 // app.use(express.static('./client/build'));
 
