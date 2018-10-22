@@ -4,17 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HomeComponent, NavComponent, CardComponent, GiphyService  } from './giphy';
+import { HomeComponent, NavComponent, CardComponent, GiphyService, SearchComponent  } from './giphy';
 
 const appRoutes: Routes = [
-  { path: 'trial', component: AppComponent },
   {
-    path: 'heroes',
-    component: AppComponent,
-    data: { title: 'Heroes List' }
+    path: '',
+    component: HomeComponent,
   },
-  { path: '',
-    redirectTo: '/heroes',
+  {
+    path: 'search',
+    component: SearchComponent,
+  },
+  { path: '*',
+    redirectTo: '/',
     pathMatch: 'full'
   },
 ];
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
     NavComponent,
     HomeComponent,
     CardComponent,
+    SearchComponent
   ],
   imports: [
     RouterModule.forRoot(

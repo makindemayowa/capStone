@@ -14,7 +14,7 @@ export class HomeComponent {
   }
   ngOnInit() {
     this.giphyService
-      .getEntries()
+      .getGiphies()
       .then(entries => {
         this.gifs = entries
       })

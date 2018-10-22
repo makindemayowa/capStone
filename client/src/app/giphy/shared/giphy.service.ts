@@ -8,9 +8,15 @@ export class GiphyService {
 
   }
 
-  getEntries() {
+  getGiphies() {
     return axios.get('http://localhost:4000/api/randomGiphy').then((res) => {
       return res.data.randGifs as Gifs[]
+    })
+  }
+
+  searchGiphies(query: string) {
+    return axios.get(`http://localhost:4000/api/search?q=${query}`).then((res) => {
+      return res.data.result as Gifs[]
     })
   }
 }

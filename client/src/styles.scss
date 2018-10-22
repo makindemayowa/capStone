@@ -8,8 +8,9 @@ body {
 	text-align: center;
 }
 
-a {
+a, a:hover {
 	text-decoration: none;
+	color: #000
 }
 
 .flex-container {
