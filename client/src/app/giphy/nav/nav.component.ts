@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-nav',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
+  searchText: string = "";
+  @ViewChild('searchForm') searchForm: NgForm
+
+  onSearchSubmit() {
+    console.log('========>', this.searchText)
+  }
 }

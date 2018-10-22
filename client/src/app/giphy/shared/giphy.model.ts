@@ -1,6 +1,4 @@
-export class Entry {
+export class Gifs {
   title: String;
-  photo: String;
-  description: String;
-  comments: any[];
+  imgUrl: String;
 }

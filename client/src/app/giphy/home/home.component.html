@@ -4,3 +4,8 @@
     <a href="#" class="signup-btn">GET STARTED</a>
   </div>
 </div>
+<div class="card-container">
+  <div class="card-columns">
+    <app-card *ngFor="let gif of gifs" [gif]="gif"></app-card>
+  </div>
+</div>

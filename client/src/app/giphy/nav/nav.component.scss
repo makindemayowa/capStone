@@ -8,7 +8,14 @@
   .app-title {
     letter-spacing: 2px;
     font-weight: bolder;
-    width: 80%
+    width: 65%
+  }
+
+  .search-container-w {
+    display: block;
+    @media screen and (max-width: 480px) {
+      display: none
+    }
   }
 
   .nav-items {
@@ -18,5 +25,32 @@
       letter-spacing: 1px;
       margin-right: 20px
     }
+  }
+}
+
+.search-container-m {
+  display: none;
+  @media screen and (max-width: 480px) {
+    display: block;
+    margin: 10px;
+  }
+}
+
+.search-input {
+  padding-left: 10px;
+  outline: none;
+  margin-right: 50px;
+  border-radius: 5px;
+  height: 30px;
+  width: 200px;
+  font-size: 12px;
+  background: url('../../../assets/images/search.svg');
+  background-repeat: no-repeat;
+  background-position: 98% 50%;
+
+  @media screen and (max-width: 480px) {
+    border: 1px solid #979797;
+    margin-right: 0;
+    width: 100%
   }
 }

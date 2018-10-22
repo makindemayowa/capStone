@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GiphyService } from "../shared/giphy.service";
+import { Gifs } from "../shared/giphy.model";
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,15 @@ import { GiphyService } from "../shared/giphy.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  gifs: Gifs[]
   constructor(private giphyService: GiphyService) {
 
   }
   ngOnInit() {
     this.giphyService
       .getEntries()
-      .then(entries => console.log('entries', entries))
+      .then(entries => {
+        this.gifs = entries
+      })
   }
 }

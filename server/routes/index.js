@@ -9,8 +9,8 @@ module.exports = (app) => {
         const randGifs = []
         gifArr.forEach(gif => {
           const newGif = {
-            title: gif.title,
-            imgUrl: gif.images.original
+            title: gif.title.split(" ").join(""),
+            imgUrl: gif.images.original.url
           }
           randGifs.push(newGif);
         });
@@ -19,8 +19,9 @@ module.exports = (app) => {
         });
       })
       .catch((err) => {
+        console.log(err.message)
         return res.status(400).json({
-          message: 'error', err
+          message: 'error', err: err.message
         });
       })
     }
