@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HomeComponent, NavComponent, CardComponent, GiphyService, SearchComponent  } from './giphy';
+import { HomeComponent, NavComponent, CardComponent, GiphyService, SearchComponent, TagComponent  } from './giphy';
 
 const appRoutes: Routes = [
   {
@@ -27,7 +27,8 @@ const appRoutes: Routes = [
     NavComponent,
     HomeComponent,
     CardComponent,
-    SearchComponent
+    SearchComponent,
+    TagComponent
   ],
   imports: [
     RouterModule.forRoot(

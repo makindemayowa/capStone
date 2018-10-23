@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,12 @@ export class NavComponent {
   searchText: string = "";
   @ViewChild('searchForm') searchForm: NgForm
 
+  constructor(private router: Router) {
+
+  }
   onSearchSubmit() {
-    console.log('========>', this.searchText)
+    const searchText = this.searchText;
+    this.searchText = '';
+    this.router.navigate(['/search'], { queryParams: { q: searchText } });
   }
 }

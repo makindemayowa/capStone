@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Gifs } from "./giphy.model";
+import { Tags } from "./giphy.model";
 
 @Injectable()
 export class GiphyService {
@@ -17,6 +18,12 @@ export class GiphyService {
   searchGiphies(query: string) {
     return axios.get(`http://localhost:4000/api/search?q=${query}`).then((res) => {
       return res.data.result as Gifs[]
+    })
+  }
+
+  getTrends() {
+    return axios.get(`http://localhost:4000/api/trends`).then((res) => {
+      return res.data.trends as Tags[]
     })
   }
 }

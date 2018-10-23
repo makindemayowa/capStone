@@ -1,5 +1,5 @@
 <div class="card-container">
-  <div class="card-columns">
-    <app-card></app-card>
+    <div class="card-columns">
+      <app-card *ngFor="let gif of gifs" [gif]="gif"></app-card>
+    </div>
   </div>
-</div>
