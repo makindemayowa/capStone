@@ -1,0 +1,71 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="nav-header">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a (click)="clearForm()" class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab"
+                aria-controls="home" aria-selected="true">Login</a>
+            </li>
+            <li class="nav-item">
+              <a (click)="clearForm()" class="nav-link" id="signup-tab" data-toggle="tab" href="#signup" role="tab"
+                aria-controls="profile" aria-selected="false">Signup</a>
+            </li>
+          </ul>
+        </div>
+        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+            <div class="login-details">
+              <form #loginForm="ngForm" (submit)="submitLogin()">
+                <div class="form-group">
+                  <label for="email" class="col-form-label">Email:</label>
+                  <input name="Email" type="email" required="required" class="form-control" [(ngModel)]="email">
+                </div>
+                <div class="form-group">
+                  <label for="password" class="col-form-label">Password:</label>
+                  <input name="Password" equired="required" type="password" class="form-control" [(ngModel)]="password">
+                </div>
+                <div *ngIf="isAuthError" class="red-text text-center error-message">
+                  {{errorMessage}}
+                </div>
+                <div class="text-center">
+                  <button class="btn btn-primary">Login</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+            <div class="signup-details">
+              <form #signupForm="ngForm" (submit)="submitSignup()">
+                <div class="form-group">
+                  <label for="email" class="col-form-label">Email:</label>
+                  <input [(ngModel)]="email" name="email" type="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="password" class="col-form-label">Password:</label>
+                  <input [(ngModel)]="password" name="password" type="password" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="confirm-password" class="col-form-label">Confirm Password:</label>
+                  <input [(ngModel)]="confirmPassword" name="confirm-password" type="password" class="form-control">
+                </div>
+                <div *ngIf="isAuthError" class="red-text text-center error-message">
+                  {{errorMessage}}
+                </div>
+                <div class="text-center">
+                  <button class="btn btn-primary">Signup</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

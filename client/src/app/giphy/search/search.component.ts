@@ -10,7 +10,9 @@ import { Gifs } from "../shared/giphy.model";
 })
 export class SearchComponent {
   searchText: string = "";
-  gifs: Gifs[]
+  gifs: Gifs[];
+  loading: boolean = false;
+  notFound: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +24,12 @@ export class SearchComponent {
       const searchParams = { ...params.keys, ...params };
       const searchQuery = searchParams.params.q;
       if (searchQuery) {
+        this.loading = true
         this.giphyService.searchGiphies(searchQuery).then((result) => {
+          if(!result.length) {
+            this.notFound = true;
+          }
+          this.loading = false
           this.gifs = result
         })
       }

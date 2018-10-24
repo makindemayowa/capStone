@@ -9,14 +9,27 @@ import { Router } from '@angular/router';
 })
 export class NavComponent {
   searchText: string = "";
-  @ViewChild('searchForm') searchForm: NgForm
+  isLogged: boolean = false;
 
+  @ViewChild('searchForm') searchForm: NgForm
   constructor(private router: Router) {
 
   }
+
+  ngDoCheck() {
+    if(localStorage.getItem('capstone_token')) {
+      this.isLogged = true;
+    }
+  }
+
   onSearchSubmit() {
     const searchText = this.searchText;
     this.searchText = '';
     this.router.navigate(['/search'], { queryParams: { q: searchText } });
+  }
+
+  logout() {
+    localStorage.removeItem('capstone_token')
+    this.router.navigate(['/']);
   }
 }

@@ -4,7 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HomeComponent, NavComponent, CardComponent, GiphyService, SearchComponent, TagComponent  } from './giphy';
+import {
+  HomeComponent,
+  NavComponent,
+  CardComponent,
+  GiphyService,
+  SearchComponent,
+  TagComponent,
+  AuthComponent,
+  LoadingComponent
+} from './giphy';
 
 const appRoutes: Routes = [
   {
@@ -14,6 +23,10 @@ const appRoutes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   { path: '*',
     redirectTo: '/',
@@ -28,7 +41,9 @@ const appRoutes: Routes = [
     HomeComponent,
     CardComponent,
     SearchComponent,
-    TagComponent
+    TagComponent,
+    AuthComponent,
+    LoadingComponent
   ],
   imports: [
     RouterModule.forRoot(

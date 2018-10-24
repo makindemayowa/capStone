@@ -26,4 +26,15 @@ export class GiphyService {
       return res.data.trends as Tags[]
     })
   }
+
+  requestSignup(userDetails) {
+    return axios.post(`http://localhost:4000/api/signup`, userDetails).then((res) => {
+      return res.data.jsonToken
+    })
+  }
+  requestLogin(userDetails) {
+    return axios.post(`http://localhost:4000/api/login`, userDetails).then((res) => {
+      return res.data.jsonToken
+    })
+  }
 }

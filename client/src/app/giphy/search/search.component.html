@@ -1,5 +1,16 @@
 <div class="card-container">
-    <div class="card-columns">
-      <app-card *ngFor="let gif of gifs" [gif]="gif"></app-card>
+  <div *ngIf="notFound" class="not-found">
+    <div class="not-found-t">
+      No result found
     </div>
+    <button routerLink="/" class="back-btn">
+      Go back
+    </button>
   </div>
+  <div *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+  <div class="card-columns">
+    <app-card *ngFor="let gif of gifs" [gif]="gif"></app-card>
+  </div>
+</div>

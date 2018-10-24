@@ -23,3 +23,46 @@ button {
 	outline: none;
 	cursor: pointer;
 }
+
+.not-found {
+  padding: 10px;
+  text-align: center;
+  margin-top: 20vh;
+
+  .not-found-t {
+    font-weight: 400;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .back-btn {
+    padding: 10px;
+		color: #fff;
+		letter-spacing: 2px;
+		text-decoration: none;
+		background: #4aca85;
+		border-radius: 30px;
+		border: 1px solid #4aca85;
+  }
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  margin: 30vh auto;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

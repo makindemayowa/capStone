@@ -7,33 +7,20 @@
     </div>
     <div class="search-container-w">
       <form (submit)="onSearchSubmit()" #searchForm="ngForm">
-        <input
-          type="text"
-          name="search"
-          class="search-input"
-          placeholder="search giphy"
-          [(ngModel)]="searchText"
-        >
+        <input type="text" name="search" class="search-input" placeholder="search giphy" [(ngModel)]="searchText">
       </form>
     </div>
-    <div class="nav-items flex-container">
-      <div class="nav-item">
-        LOGIN
-      </div>
-      <div class="nav-item">
-        SIGNUP
+    <div *ngIf="isLogged" class="nav-items flex-container">
+      <div (click)="logout()" class="nav-item">
+        <a href="/">
+          <span class="glyphicon glyphicon-envelope">Logout</span>
+        </a>
       </div>
     </div>
   </div>
 </div>
 <div class="search-container-m">
   <form (submit)="onSearchSubmit()" #searchForm="ngForm">
-    <input
-      type="text"
-      name="search"
-      class="search-input"
-      placeholder="search text"
-      [(ngModel)]="searchText"
-    >
+    <input type="text" name="search" class="search-input" placeholder="search text" [(ngModel)]="searchText">
   </form>
 </div>
