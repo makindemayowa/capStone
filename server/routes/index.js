@@ -145,4 +145,41 @@ module.exports = (app) => {
       });
     }
   );
+
+  app.post('/api/favorites',
+    (req, res) => {
+      const token = req.headers.Authorization;
+      let _id;
+      if (token) {
+        jwt.verify(token, process.env.JWT_SECRET_KEY, (error, decoded) => {
+          if (error) {
+            return res.status(403).json({
+              message: 'Failed to authenticate token.'
+            });
+          }
+          _id = userDetails._id;
+        });
+      } else {
+        return res.status(400).json({
+          message: 'No token provided.'
+        });
+      }
+      User.findOne({
+        _id
+      }, (err, user) => {
+        if (err) return res.status(500).send({ err });
+        if (!user) {
+          return res.status(404)
+            .send({ message: 'user not found' });
+        }
+        user.favorites.push(req.body.favorite);
+        user.save((err, updatedUser) => {
+          if (err) {
+            return res.status(500).send({ err });
+          }
+          return res.status(200).send({ message: 'success', updatedUser });
+        });
+      });
+    }
+  );
 }

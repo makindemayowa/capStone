@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     unique: true
   },
   password: String,
+  favorites: Array
 },
 { timestamps: { createdAt: 'created_at' } });
 
