@@ -147,16 +147,17 @@ module.exports = (app) => {
     }
   );
 
-  app.post('/api/favorites', auth.checkToken,
+  app.post('/api/favorite', auth.checkToken,
     (req, res) => {
       User.findOne({
-        _id: req.user._id
+        _id: req.user.id
       }, (err, user) => {
         if (err) return res.status(500).send({ err });
         if (!user) {
           return res.status(404)
             .send({ message: 'user not found' });
         }
+        console.log('server', req.body)
         user.favorites.push(req.body.favorite);
         user.save((err, updatedUser) => {
           if (err) {
@@ -168,17 +169,17 @@ module.exports = (app) => {
     }
   );
 
-  app.put('/api/favorites', auth.checkToken,
+  app.put('/api/favorite', auth.checkToken,
     (req, res) => {
       User.findOne({
-        _id: req.user._id
+        _id: req.user.id
       }, (err, user) => {
         if (err) return res.status(500).send({ err });
         if (!user) {
           return res.status(404)
             .send({ message: 'user not found' });
         }
-        const index = user.favorites.indexOf(req.body.favorite);
+        const index = user.favorites.findIndex(favorite => req.body.favorite.query === favorite.query);
         if (index > -1) {
           user.favorites.splice(index, 1);
         }
@@ -188,6 +189,21 @@ module.exports = (app) => {
           }
           return res.status(200).send({ message: 'success', updatedUser });
         });
+      });
+    }
+  );
+
+  app.get('/api/user', auth.checkToken,
+    (req, res) => {
+      User.findOne({
+        _id: req.user.id
+      }, (err, user) => {
+        if (err) return res.status(500).send({ err });
+        if (!user) {
+          return res.status(404)
+            .send({ message: 'user not found' });
+        }
+        return res.status(200).send({ message: 'success', user });
       });
     }
   );

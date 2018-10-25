@@ -77,7 +77,11 @@
 		}
 	}
 
-
+	.favorites {
+		display: flex;
+		padding: 20px;
+		flex-wrap: wrap;
+	}
 }
 .card-container {
 	padding: 10px;

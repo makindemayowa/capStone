@@ -13,15 +13,19 @@ export class HomeComponent {
   tags: Tags[];
   isLogged: boolean = false;
   loading: boolean = false;
+  favs;
   constructor(
     private giphyService: GiphyService,
-    private router : Router
+    private router: Router
   ) {
 
   }
   ngOnInit() {
-    if(localStorage.getItem('capstone_token')) {
-      this.isLogged = true
+    if (localStorage.getItem('capstone_token')) {
+      this.isLogged = true;
+      this.giphyService.getUser().then((user) => {
+        this.favs = user.favorites
+      })
     }
     this.loading = true
     this.giphyService
@@ -35,5 +39,8 @@ export class HomeComponent {
       .then(tags => {
         this.tags = tags
       })
+  }
+  onFavDelete(fav) {
+    this.favs = fav;
   }
 }

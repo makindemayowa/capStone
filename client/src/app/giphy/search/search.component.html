@@ -24,7 +24,7 @@
       <span class="search-q">
         {{searchQuery}}
       </span>
-      <span *ngIf="isLogged" class="search-fav">
+      <span *ngIf="isLogged" class="search-fav" (click)="addFav()">
         (add search to favorite)
       </span>
     </div>

@@ -1,0 +1,6 @@
+<div class="fav">
+  <a [routerLink]="['/search']" [queryParams]="{ q: fav.query }" class="favorite">{{fav.searchTerm}}</a>
+  <button (click)="removeFav()" type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

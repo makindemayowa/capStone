@@ -8,3 +8,4 @@ export * from './auth/auth.component';
 export * from './search/loading.component';
 export * from './auth/auth.guard';
 export * from './auth/auth.interceptor';
+export * from './favs/favs.component';

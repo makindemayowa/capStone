@@ -5,7 +5,7 @@ import { Tags } from "./giphy.model";
 
 @Injectable()
 export class GiphyService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getGiphies() {
     return this.http.get('http://localhost:4000/api/randomGiphy').toPromise().then((res) => {
@@ -30,9 +30,28 @@ export class GiphyService {
       return res['jsonToken']
     })
   }
+
   requestLogin(userDetails) {
     return this.http.post(`http://localhost:4000/api/login`, userDetails).toPromise().then((res) => {
       return res['jsonToken']
+    })
+  }
+
+  addFavorite(favorite) {
+    return this.http.post(`http://localhost:4000/api/favorite`, { favorite }).toPromise().then((res) => {
+      return res['updatedUser']
+    })
+  }
+
+  removeFavorite(favorite) {
+    return this.http.put(`http://localhost:4000/api/favorite`, { favorite }).toPromise().then((res) => {
+      return res['updatedUser']
+    })
+  }
+
+  getUser() {
+    return this.http.get(`http://localhost:4000/api/user`).toPromise().then((res) => {
+      return res['user']
     })
   }
 }

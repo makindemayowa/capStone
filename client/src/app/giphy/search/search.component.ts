@@ -40,4 +40,13 @@ export class SearchComponent {
       }
     });
   }
+
+  addFav() {
+    const postData = {
+      query: this.searchQuery,
+      searchTerm: this.searchQuery.split(' ').join('')
+    }
+    this.giphyService.addFavorite(postData).then((user) => {
+    })
+  }
 }

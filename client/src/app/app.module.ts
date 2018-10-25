@@ -15,7 +15,8 @@ import {
   AuthComponent,
   LoadingComponent,
   AuthGuard,
-  AuthInterceptor
+  AuthInterceptor,
+  FavComponent
 } from './giphy';
 
 const appRoutes: Routes = [
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
     SearchComponent,
     TagComponent,
     AuthComponent,
-    LoadingComponent
+    LoadingComponent,
+    FavComponent
   ],
   imports: [
     BrowserModule,
