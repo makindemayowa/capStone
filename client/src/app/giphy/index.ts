@@ -6,3 +6,5 @@ export * from './shared/giphy.service';
 export * from './search/search.component';
 export * from './auth/auth.component';
 export * from './search/loading.component';
+export * from './auth/auth.guard';
+export * from './auth/auth.interceptor';

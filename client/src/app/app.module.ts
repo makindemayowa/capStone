@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import {
@@ -12,7 +13,9 @@ import {
   SearchComponent,
   TagComponent,
   AuthComponent,
-  LoadingComponent
+  LoadingComponent,
+  AuthGuard,
+  AuthInterceptor
 } from './giphy';
 
 const appRoutes: Routes = [
@@ -27,6 +30,11 @@ const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'favorites',
+    component: HomeComponent,
+    canActivate: [AuthGuard] 
   },
   { path: '*',
     redirectTo: '/',
@@ -46,15 +54,22 @@ const appRoutes: Routes = [
     LoadingComponent
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       // { enableTracing: true } // <-- debugging purposes only
     ),
-    BrowserModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
-    GiphyService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    GiphyService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

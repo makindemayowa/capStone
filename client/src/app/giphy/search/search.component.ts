@@ -13,6 +13,8 @@ export class SearchComponent {
   gifs: Gifs[];
   loading: boolean = false;
   notFound: boolean = false;
+  searchQuery: string = "";
+  isLogged: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,13 +22,16 @@ export class SearchComponent {
   ) { }
 
   ngOnInit() {
+    if (localStorage.getItem('capstone_token')) {
+      this.isLogged = true;
+    }
     this.route.queryParamMap.subscribe(params => {
       const searchParams = { ...params.keys, ...params };
-      const searchQuery = searchParams.params.q;
-      if (searchQuery) {
+      this.searchQuery = searchParams.params.q;
+      if (this.searchQuery) {
         this.loading = true
-        this.giphyService.searchGiphies(searchQuery).then((result) => {
-          if(!result.length) {
+        this.giphyService.searchGiphies(this.searchQuery).then((result) => {
+          if (!result.length) {
             this.notFound = true;
           }
           this.loading = false

@@ -1,0 +1,26 @@
+.result-count {
+  font-size: 20px;
+  padding: 10px;
+  .back-btn {
+    margin-right: 10px;
+    color: #fff;
+    font-size: 12px;
+		letter-spacing: 2px;
+		text-decoration: none;
+		background: #4aca85;
+		border-radius: 10px;
+		border: 1px solid #4aca85;
+  }
+  .result-count-len {
+    font-weight: bolder
+  }
+  .search-q {
+    font-weight: bolder
+  }
+  .search-fav {
+    font-size: 12px;
+    color: #798eea;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
