@@ -1,5 +1,6 @@
 const axios = require("axios");
 const User = require('../models/user');
+const auth = require('../auth')
 
 const secret = process.env.JWT_SECRET_KEY;
 
@@ -146,26 +147,10 @@ module.exports = (app) => {
     }
   );
 
-  app.post('/api/favorites',
+  app.post('/api/favorites', auth.checkToken,
     (req, res) => {
-      const token = req.headers.Authorization;
-      let _id;
-      if (token) {
-        jwt.verify(token, process.env.JWT_SECRET_KEY, (error, decoded) => {
-          if (error) {
-            return res.status(403).json({
-              message: 'Failed to authenticate token.'
-            });
-          }
-          _id = userDetails._id;
-        });
-      } else {
-        return res.status(400).json({
-          message: 'No token provided.'
-        });
-      }
       User.findOne({
-        _id
+        _id: req.user._id
       }, (err, user) => {
         if (err) return res.status(500).send({ err });
         if (!user) {
@@ -173,6 +158,30 @@ module.exports = (app) => {
             .send({ message: 'user not found' });
         }
         user.favorites.push(req.body.favorite);
+        user.save((err, updatedUser) => {
+          if (err) {
+            return res.status(500).send({ err });
+          }
+          return res.status(200).send({ message: 'success', updatedUser });
+        });
+      });
+    }
+  );
+
+  app.put('/api/favorites', auth.checkToken,
+    (req, res) => {
+      User.findOne({
+        _id: req.user._id
+      }, (err, user) => {
+        if (err) return res.status(500).send({ err });
+        if (!user) {
+          return res.status(404)
+            .send({ message: 'user not found' });
+        }
+        const index = user.favorites.indexOf(req.body.favorite);
+        if (index > -1) {
+          user.favorites.splice(index, 1);
+        }
         user.save((err, updatedUser) => {
           if (err) {
             return res.status(500).send({ err });
