@@ -76,7 +76,11 @@
 			color: #000
 		}
 	}
-
+	.noFav {
+		display: table;
+    margin-top: 10px;
+    margin-left: 15px;
+	}
 	.favorites {
 		display: flex;
 		padding: 20px;

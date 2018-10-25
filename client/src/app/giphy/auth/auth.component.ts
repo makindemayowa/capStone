@@ -47,7 +47,7 @@ export class AuthComponent {
       this.router.navigate(['/home']);
     }).catch((err) => {
       this.isAuthError = true;
-      this.errorMessage = err.response.data.message
+      this.errorMessage = err.error.message;
     })
   }
 
@@ -67,7 +67,7 @@ export class AuthComponent {
       this.router.navigate(['/home']);
     }).catch((err) => {
       this.isAuthError = true;
-      this.errorMessage = err.response.data.message
+      this.errorMessage = err.error.message;
     })
   }
 }

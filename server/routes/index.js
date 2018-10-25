@@ -157,7 +157,6 @@ module.exports = (app) => {
           return res.status(404)
             .send({ message: 'user not found' });
         }
-        console.log('server', req.body)
         user.favorites.push(req.body.favorite);
         user.save((err, updatedUser) => {
           if (err) {
@@ -179,7 +178,8 @@ module.exports = (app) => {
           return res.status(404)
             .send({ message: 'user not found' });
         }
-        const index = user.favorites.findIndex(favorite => req.body.favorite.query === favorite.query);
+        const index = user.favorites.findIndex(
+          favorite => req.body.favorite.query === favorite.query);
         if (index > -1) {
           user.favorites.splice(index, 1);
         }

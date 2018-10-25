@@ -4,16 +4,19 @@
     <a data-toggle="modal" data-target="#exampleModal" class="signup-btn">GET STARTED</a>
   </div>
 </div>
-<div *ngIf="isLogged" class="tweets--container">
+<div *ngIf="isLogged && !loading" class="tweets--container">
   <div class="tweets--container-h">
     Search gifs by favorited searches
+  </div>
+  <div class="noFav" *ngIf="(!favs.length)">
+    No favorite added yet
   </div>
   <div class="favorites">
     <app-favs (onDelete)="onFavDelete($event)" *ngFor="let fav of favs" [fav]="fav" class="tweet"></app-favs>
   </div>
 </div>
 <div class="tweets--container">
-  <div class="tweets--container-h" *ngIf="!loading">
+  <div class="tweets--container-h">
     Search gifs by trending twitter tags today
   </div>
   <div class="tweets--container-ul">

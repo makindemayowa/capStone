@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GiphyService } from "../shared/giphy.service";
 import { Router } from '@angular/router';
-import { Gifs, Tags } from "../shared/giphy.model";
+import { Gifs, Tags, Favs } from "../shared/giphy.model";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ export class HomeComponent {
   tags: Tags[];
   isLogged: boolean = false;
   loading: boolean = false;
-  favs;
+  favs: Favs[];
   constructor(
     private giphyService: GiphyService,
     private router: Router

@@ -27,7 +27,7 @@ export class SearchComponent {
     }
     this.route.queryParamMap.subscribe(params => {
       const searchParams = { ...params.keys, ...params };
-      this.searchQuery = searchParams.params.q;
+      this.searchQuery = searchParams['params'].q;
       if (this.searchQuery) {
         this.loading = true
         this.giphyService.searchGiphies(this.searchQuery).then((result) => {
