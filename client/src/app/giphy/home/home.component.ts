@@ -23,21 +23,21 @@ export class HomeComponent {
   ngOnInit() {
     if (localStorage.getItem('capstone_token')) {
       this.isLogged = true;
-      this.giphyService.getUser().then((user) => {
-        this.favs = user.favorites
+      this.giphyService.getUser().subscribe((user) => {
+        this.favs = user['user'].favorites
       })
     }
     this.loading = true
     this.giphyService
       .getGiphies()
-      .then(entries => {
+      .subscribe(entries => {
         this.loading = false
-        this.gifs = entries
+        this.gifs = entries['randGifs']
       })
     this.giphyService
       .getTrends()
-      .then(tags => {
-        this.tags = tags
+      .subscribe(tags => {
+        this.tags = tags['trends']
       })
   }
   onFavDelete(fav) {

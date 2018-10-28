@@ -18,7 +18,7 @@ export class NavComponent {
 
   ngDoCheck() {
     if(localStorage.getItem('capstone_token')) {
-      this.isLogged = true;
+      return this.isLogged = true;
     }
   }
 
@@ -26,10 +26,12 @@ export class NavComponent {
     const searchText = this.searchText;
     this.searchText = '';
     this.router.navigate(['/search'], { queryParams: { q: searchText } });
+    return searchText
   }
 
   logout() {
     localStorage.removeItem('capstone_token')
     this.router.navigate(['/']);
+    return this.isLogged = false;
   }
 }

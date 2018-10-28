@@ -40,14 +40,16 @@ export class AuthComponent {
       email: this.email,
       password: this.password
     }
-    this.giphyService.requestLogin(userDetails).then((token) => {
-      localStorage.setItem('capstone_token', token);
+    this.giphyService.requestLogin(userDetails).subscribe((token) => {
+      if (!token['jsonToken']) {
+        this.isAuthError = true;
+        this.errorMessage = 'email or password is incorrect';
+        return false
+      }
+      localStorage.setItem('capstone_token', token['jsonToken']);
       document.getElementById("closeBtn").click();
       this.clearForm
       this.router.navigate(['/home']);
-    }).catch((err) => {
-      this.isAuthError = true;
-      this.errorMessage = err.error.message;
     })
   }
 
@@ -60,14 +62,16 @@ export class AuthComponent {
       email: this.email,
       password: this.password
     }
-    this.giphyService.requestSignup(userDetails).then((token) => {
-      localStorage.setItem('capstone_token', token);
+    this.giphyService.requestSignup(userDetails).subscribe((token) => {
+      if (!token['jsonToken']) {
+        this.isAuthError = true;
+        this.errorMessage = 'user credential already exist';
+        return false
+      }
+      localStorage.setItem('capstone_token', token['jsonToken']);
       document.getElementById("closeBtn").click();
       this.clearForm
       this.router.navigate(['/home']);
-    }).catch((err) => {
-      this.isAuthError = true;
-      this.errorMessage = err.error.message;
     })
   }
 }

@@ -8,14 +8,16 @@ import { GiphyService } from "../shared/giphy.service";
 })
 export class FavComponent {
   @Input() fav: {};
-  @Output() onDelete = new EventEmitter<{query: string, searchTerm: string}>();
+  @Output() onDelete = new EventEmitter<[{query: string, searchTerm: string}]>();
+  updatedFavs: [{query: string, searchTerm: string}];
   constructor(
     private giphyService: GiphyService
   ) { }
 
   removeFav() {
-    this.giphyService.removeFavorite(this.fav).then((res) => {
-      this.onDelete.emit(res.favorites);
+    this.giphyService.removeFavorite(this.fav).subscribe((res) => {
+      this.updatedFavs = res['updatedUser'].favorites;
+      this.onDelete.emit(this.updatedFavs);
     })
   }
 }

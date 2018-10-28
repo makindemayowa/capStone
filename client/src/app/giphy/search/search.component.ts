@@ -15,6 +15,7 @@ export class SearchComponent {
   notFound: boolean = false;
   searchQuery: string = "";
   isLogged: boolean = false;
+  newfav;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,14 +30,7 @@ export class SearchComponent {
       const searchParams = { ...params.keys, ...params };
       this.searchQuery = searchParams['params'].q;
       if (this.searchQuery) {
-        this.loading = true
-        this.giphyService.searchGiphies(this.searchQuery).then((result) => {
-          if (!result.length) {
-            this.notFound = true;
-          }
-          this.loading = false
-          this.gifs = result
-        })
+        this.searchGif();
       }
     });
   }
@@ -46,7 +40,20 @@ export class SearchComponent {
       query: this.searchQuery,
       searchTerm: this.searchQuery.split(' ').join('')
     }
-    this.giphyService.addFavorite(postData).then((user) => {
+    this.giphyService.addFavorite(postData).subscribe((user) => {
+      return this.newfav = user
+    })
+  }
+
+  searchGif() {
+    this.loading = true
+    this.giphyService.searchGiphies(this.searchQuery).subscribe((result) => {
+      this.gifs = result['result'];
+      if (!this.gifs.length) {
+        this.notFound = true;
+      }
+      this.loading = false
+      return this.gifs
     })
   }
 }
