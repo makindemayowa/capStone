@@ -3,6 +3,9 @@ const User = require('../models/user');
 const auth = require('../auth')
 
 const secret = process.env.JWT_SECRET_KEY;
+const apiKey = process.env.GIPHY_KEY;
+const twiToken = process.env.TWITTER_TOKEN;
+
 
 const jwt = require('jsonwebtoken');
 
@@ -12,7 +15,7 @@ const createToken = (user, expiryTime) => jwt.sign(user, secret, { expiresIn: ex
 module.exports = (app) => {
   app.get('/api/randomGiphy',
     (req, res) => {
-      axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=bAugSybKD0aQdl01yzWb1hQA535v0c6b&limit=20`)
+      axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=20`)
         .then((resp) => {
           const gifArr = resp.data.data;
           const randGifs = []
@@ -38,7 +41,7 @@ module.exports = (app) => {
   app.get('/api/search',
     (req, res) => {
       const q = req.query.q;
-      axios.get(`https://api.giphy.com/v1/gifs/search?api_key=bAugSybKD0aQdl01yzWb1hQA535v0c6b&q=${q}&limit=20`)
+      axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${q}&limit=20`)
         .then((resp) => {
           const gifArr = resp.data.data;
           const result = [];
@@ -62,8 +65,8 @@ module.exports = (app) => {
   );
 
   app.get('/api/trends',
-    (req, res) => {
-      axios.defaults.headers.common.Authorization = `Bearer AAAAAAAAAAAAAAAAAAAAAF7w8gAAAAAAmZWpnq5YUDGyc1k%2FaCH3pN320jM%3DEuUjOjdtjwkw32RaeruZlNLVbHDifmQgAIL2AJSFvbZr4kpf7O`;
+    (req, res) => {twiToken
+      axios.defaults.headers.common.Authorization = twiToken;
       axios.get(`https://api.twitter.com/1.1/trends/place.json?id=1398823`)
         .then((resp) => {
           const trending = resp.data[0].trends;
