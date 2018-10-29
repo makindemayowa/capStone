@@ -5,12 +5,14 @@ import { Tags } from "./giphy.model";
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+// const BASE_URL = `https://twigif.herokuapp.com`;
+const BASE_URL = `http://localhost:4000`
+
 @Injectable({
   providedIn: 'root',
 })
 export class GiphyService {
   constructor(private http: HttpClient) { }
-
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -19,73 +21,72 @@ export class GiphyService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
       console.error(`${operation} failed: ${error.error.message}`);
       return of(result as T);
     };
   }
 
   getGiphies(): Observable<Gifs[]> {
-    return this.http.get<Gifs[]>('http://localhost:4000/api/randomGiphy')
+    return this.http.get<Gifs[]>(`${BASE_URL}/api/randomGiphy`)
       .pipe(
-        tap(heroes => console.log('fetched heroes', heroes)),
+        tap(heroes => heroes),
         catchError(this.handleError('getGiphies', []))
       );
   }
 
-  searchGiphies(query: string) {
-    return this.http.get(`http://localhost:4000/api/search?q=${query}`)
+  searchGiphies(query: string): Observable<Gifs[]> {
+    return this.http.get<Gifs[]>(`${BASE_URL}/api/search?q=${query}`)
     .pipe(
-      tap(heroes => console.log('fetched heroes', heroes)),
-      catchError(this.handleError('getGiphies', []))
+      tap(heroes => heroes),
+      catchError(this.handleError('searchGiphies', []))
     );
   }
 
-  getTrends() {
-    return this.http.get(`http://localhost:4000/api/trends`)
+  getTrends(): Observable<Tags[]> {
+    return this.http.get<Tags[]>(`${BASE_URL}/api/trends`)
     .pipe(
-      tap(heroes => console.log('fetched heroes', heroes)),
-      catchError(this.handleError('getGiphies', []))
+      tap(heroes => heroes),
+      catchError(this.handleError('getTrends', []))
     );
   }
 
   requestSignup(userDetails) {
-    return this.http.post(`http://localhost:4000/api/signup`, userDetails)
+    return this.http.post(`${BASE_URL}/api/signup`, userDetails)
     .pipe(
-      tap(heroes => console.log('fetched heroes', heroes)),
-      catchError(this.handleError('getGiphies', []))
+      tap(heroes => heroes),
+      catchError(this.handleError('requestSignup', []))
     );
   }
 
   requestLogin(userDetails) {
-    return this.http.post(`http://localhost:4000/api/login`, userDetails)
+    return this.http.post(`${BASE_URL}/api/login`, userDetails)
     .pipe(
-      tap(heroes => console.log('fetched heroes', heroes)),
-      catchError(this.handleError('getGiphies', []))
+      tap(heroes => heroes),
+      catchError(this.handleError('requestLogin', []))
     );
   }
 
   addFavorite(favorite) {
-    return this.http.post(`http://localhost:4000/api/favorite`, { favorite })
+    return this.http.post(`${BASE_URL}/api/favorite`, { favorite })
     .pipe(
-      tap(heroes => console.log('fetched heroes', heroes)),
-      catchError(this.handleError('getGiphies', []))
+      tap(heroes => heroes),
+      catchError(this.handleError('addFavorite', []))
     );
   }
 
   removeFavorite(favorite) {
-    return this.http.put(`http://localhost:4000/api/favorite`, { favorite })
+    return this.http.put(`${BASE_URL}/api/favorite`, { favorite })
     .pipe(
-      tap(heroes => console.log('fetched heroes', heroes)),
-      catchError(this.handleError('getGiphies', []))
+      tap(heroes => heroes),
+      catchError(this.handleError('removeFavorite', []))
     );
   }
 
   getUser() {
-    return this.http.get(`http://localhost:4000/api/user`)
+    return this.http.get(`${BASE_URL}/api/user`)
     .pipe(
-      tap(heroes => console.log('fetched heroes', heroes)),
-      catchError(this.handleError('getGiphies', []))
+      tap(heroes => heroes),
+      catchError(this.handleError('getUser', []))
     );
   }
 }

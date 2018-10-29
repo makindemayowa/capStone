@@ -1,7 +1,10 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { GiphyService } from './giphy.service';
-import { Gifs, Tags, Favs } from "./giphy.model";
+import { Gifs, Tags } from "./giphy.model";
+
+// const BASE_URL = `https://twigif.herokuapp.com`;
+const BASE_URL = `http://localhost:4000`
 
 describe('GiphyService', () => {
   let httpTestingController: HttpTestingController;
@@ -19,7 +22,7 @@ describe('GiphyService', () => {
         giphyService.getGiphies().subscribe((giphies) => {
           return expect(giphies).toEqual(testData)
         })
-        const req = httpTestingController.expectOne('http://localhost:4000/api/randomGiphy');
+        const req = httpTestingController.expectOne(`${BASE_URL}/api/randomGiphy`);
         expect(req.request.method).toEqual('GET');
         req.flush(testData);
         httpTestingController.verify();
@@ -35,7 +38,7 @@ describe('GiphyService', () => {
         giphyService.searchGiphies(query).subscribe((giphies) => {
           return expect(giphies).toEqual(testData)
         })
-        const req = httpTestingController.expectOne(`http://localhost:4000/api/search?q=${query}`);
+        const req = httpTestingController.expectOne(`${BASE_URL}/api/search?q=${query}`);
         expect(req.request.method).toEqual('GET');
         req.flush(testData);
         httpTestingController.verify();
@@ -50,7 +53,7 @@ describe('GiphyService', () => {
         giphyService.getTrends().subscribe((giphies) => {
           return expect(giphies).toEqual(testData)
         })
-        const req = httpTestingController.expectOne(`http://localhost:4000/api/trends`);
+        const req = httpTestingController.expectOne(`${BASE_URL}/api/trends`);
         expect(req.request.method).toEqual('GET');
         req.flush(testData);
         httpTestingController.verify();
@@ -65,7 +68,7 @@ describe('GiphyService', () => {
         giphyService.requestSignup().subscribe((giphies) => {
           return expect(giphies).toEqual(testData)
         })
-        const req = httpTestingController.expectOne(`http://localhost:4000/api/signup`);
+        const req = httpTestingController.expectOne(`${BASE_URL}/api/signup`);
         expect(req.request.method).toEqual('POST');
         req.flush(testData);
         httpTestingController.verify();
@@ -80,7 +83,7 @@ describe('GiphyService', () => {
         giphyService.requestLogin().subscribe((giphies) => {
           return expect(giphies).toEqual(testData)
         })
-        const req = httpTestingController.expectOne(`http://localhost:4000/api/login`);
+        const req = httpTestingController.expectOne(`${BASE_URL}/api/login`);
         expect(req.request.method).toEqual('POST');
         req.flush(testData);
         httpTestingController.verify();
@@ -95,7 +98,7 @@ describe('GiphyService', () => {
         giphyService.addFavorite().subscribe((giphies) => {
           return expect(giphies).toEqual(testData)
         })
-        const req = httpTestingController.expectOne(`http://localhost:4000/api/favorite`);
+        const req = httpTestingController.expectOne(`${BASE_URL}/api/favorite`);
         expect(req.request.method).toEqual('POST');
         req.flush(testData);
         httpTestingController.verify();
@@ -111,7 +114,7 @@ describe('GiphyService', () => {
         giphyService.removeFavorite().subscribe((giphies) => {
           return expect(giphies).toEqual(testData)
         })
-        const req = httpTestingController.expectOne(`http://localhost:4000/api/favorite`);
+        const req = httpTestingController.expectOne(`${BASE_URL}/api/favorite`);
         expect(req.request.method).toEqual('PUT');
         req.flush(testData);
         httpTestingController.verify();
@@ -126,7 +129,7 @@ describe('GiphyService', () => {
         giphyService.getUser().subscribe((giphies) => {
           return expect(giphies).toEqual(testData)
         })
-        const req = httpTestingController.expectOne(`http://localhost:4000/api/user`);
+        const req = httpTestingController.expectOne(`${BASE_URL}/api/user`);
         expect(req.request.method).toEqual('GET');
         req.flush(testData);
         httpTestingController.verify();
